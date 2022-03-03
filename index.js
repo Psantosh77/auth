@@ -6,15 +6,18 @@ const User = require("./User");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 
-const CorsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
+ app.use(cors({
+   origin:  "*"
+ }))
+// const CorsOptions = {
+//   origin: function (origin, callback) {
+//     if (!origin || whitelist.indexOf(origin) !== -1) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   }
+// }
 
 // database connection
 const url = `mongodb+srv://material_library:ML123@cluster0.jh0wv.mongodb.net/material_library?retryWrites=true&w=majority`;
@@ -36,7 +39,7 @@ mongoose
 
 app.use(express.json());
 
-app.use(cors(CorsOptions.AllowAll));
+// app.use(cors(CorsOptions.AllowAll));
 
 app.post("/auth/login", async (req, res) => {
   const { email, password } = req.body;
@@ -78,8 +81,8 @@ app.post("/auth/register", async (req, res) => {
 });
 
 
-if(process.env.NODE_ENV == "production")
-app.use(express.static("MLDEV/build"))
+
+
 
 
 app.listen(PORT, () => {
