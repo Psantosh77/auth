@@ -64,7 +64,7 @@ app.post("/auth/register", async (req, res) => {
   if (userExists) {
     return res.json({ message: "User already exists" });
   } else if (password !== cpassword) {
-    return res.json({ message: "password didn't match" });
+    return res.json({ message: "password s didn't match" });
   } else {
     const newUser = new User({
       email,
